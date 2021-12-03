@@ -19,7 +19,7 @@ export function MapComponent() {
 
     //Changing the coordinates of the placemark when moving the placemark
     const onBoundsPlacemarkChange = (e, id) => {
-        let array = [];
+        const array = [];
         placemarks.map((element) => {
             if (element.id === id) {
                 element.coord = e
@@ -36,7 +36,7 @@ export function MapComponent() {
 
 
     const deletePlacemark = (element) => {
-        let array = placemarks.filter(e => e.id != element.id)
+        const array = placemarks.filter(e => e.id != element.id)
         setplacemarks(array)
     }
 
@@ -91,7 +91,7 @@ export function MapComponent() {
                 {
                     //creating a route between labels
                     placemarks.map((e, index) => {
-                        let polyGeo = [];
+                        const polyGeo = [];
                         if (placemarks[index + 1]) {
                             polyGeo.push(placemarks[index].coord)
                             polyGeo.push(placemarks[index + 1].coord)
