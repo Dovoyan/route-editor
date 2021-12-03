@@ -13,12 +13,12 @@ export function MapComponent() {
     const mapState = { center: [55.76, 37.64], zoom: 10 };
 
 
-    let onBoundsChange = e => {
+    const onBoundsChange = e => {
         setcenterCoord(e.get('target').getCenter())
     }
 
     //Changing the coordinates of the placemark when moving the placemark
-    let onBoundsPlacemarkChange = (e, id) => {
+    const onBoundsPlacemarkChange = (e, id) => {
         let array = [];
         placemarks.map((element) => {
             if (element.id === id) {
@@ -30,12 +30,12 @@ export function MapComponent() {
     }
 
 
-    let addPlacemark = () => {
+    const addPlacemark = () => {
         setplacemarks([...placemarks, { coord: centerCoord, id: placemarks[placemarks.length - 1].id + 1, name: inputEl.current.value }])
     }
 
 
-    let deletePlacemark = (element) => {
+    const deletePlacemark = (element) => {
         let array = placemarks.filter(e => e.id != element.id)
         setplacemarks(array)
     }
