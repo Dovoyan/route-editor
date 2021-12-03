@@ -1,6 +1,6 @@
 .placemark {
   display: flex;
-  width: 600px;
+  flex-wrap: wrap;
 }
 
 .placemarkEl {
