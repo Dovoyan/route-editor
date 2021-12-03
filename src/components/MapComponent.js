@@ -4,23 +4,20 @@ import { Map, Placemark, Polyline } from 'react-yandex-maps';
 export function MapComponent() {
     const map = useRef(null);
 
-    //Хранилище для состояния координат центра карты
     const [centerCoord, setcenterCoord] = useState([55.76, 37.64]);
 
-    //Хранилище для состояния значений всех меток
     const [placemarks, setplacemarks] = useState([{ coord: [55.76, 37.64], id: 0, name: "Start" }]);
 
-    //Хранилище для имени метки из input
     const inputEl = useRef(null);
 
     const mapState = { center: [55.76, 37.64], zoom: 10 };
 
-    //Смена координат центра карты при прокрутке карты
+
     let onBoundsChange = e => {
         setcenterCoord(e.get('target').getCenter())
     }
 
-    //Смена координат метки при перемещении метки
+    //Changing the coordinates of the placemark when moving the placemark
     let onBoundsPlacemarkChange = (e, id) => {
         let array = [];
         placemarks.map((element) => {
@@ -32,21 +29,17 @@ export function MapComponent() {
         setplacemarks(array)
     }
 
-    //Добавление метки
+
     let addPlacemark = () => {
         setplacemarks([...placemarks, { coord: centerCoord, id: placemarks[placemarks.length - 1].id + 1, name: inputEl.current.value }])
     }
 
-    //Удаление метки
+
     let deletePlacemark = (element) => {
         let array = placemarks.filter(e => e.id != element.id)
         setplacemarks(array)
     }
 
-    let geocode = (ymaps) => {
-        ymaps.geocode('Мытищи')
-            .then(result => console.log(result))
-    }
 
     return (
         <div className="page">
@@ -57,7 +50,7 @@ export function MapComponent() {
                 </form>
 
                 {
-                    //создание описания меток меток
+
                     placemarks.map((e) => {
                         return (
                             <div className="placemark">
@@ -69,8 +62,6 @@ export function MapComponent() {
                     })}
             </div>
             <Map
-                onLoad={ymaps => geocode(ymaps)}
-                modules={['geocode']}
                 instanceRef={map}
                 defaultState={mapState}
                 onBoundsChange={onBoundsChange}
@@ -78,7 +69,7 @@ export function MapComponent() {
                 height='500px'
             >
                 {
-                    //создание меток
+                    //create label
                     placemarks.map((element) => {
                         return (
                             <Placemark
@@ -98,7 +89,7 @@ export function MapComponent() {
                         )
                     })}
                 {
-                    //создание маршрута между метками 
+                    //creating a route between labels
                     placemarks.map((e, index) => {
                         let polyGeo = [];
                         if (placemarks[index + 1]) {
