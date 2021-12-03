@@ -3,9 +3,12 @@ import './App.css';
 import { MapComponent } from './components/MapComponent';
 import { YMaps, Map } from 'react-yandex-maps';
 
+
 function App() {
+
   return (
-    <YMaps>
+    <YMaps
+    >
       <MapComponent />
     </YMaps>
   );

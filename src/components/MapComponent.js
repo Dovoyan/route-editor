@@ -43,13 +43,17 @@ export function MapComponent() {
         setplacemarks(array)
     }
 
+    let geocode = (ymaps) => {
+        ymaps.geocode('Мытищи')
+            .then(result => console.log(result))
+    }
 
     return (
         <div className="page">
             <div className="pageOptions">
                 <button onClick={() => addPlacemark()}>Добавить метку</button>
                 <form onSubmit={(e) => { e.preventDefault(); addPlacemark() }}>
-                    <input onKeyDown={console.log('123')} ref={inputEl} defaultValue="Новая метка" />
+                    <input ref={inputEl} defaultValue="Новая метка" />
                 </form>
 
                 {
@@ -65,6 +69,8 @@ export function MapComponent() {
                     })}
             </div>
             <Map
+                onLoad={ymaps => geocode(ymaps)}
+                modules={['geocode']}
                 instanceRef={map}
                 defaultState={mapState}
                 onBoundsChange={onBoundsChange}
