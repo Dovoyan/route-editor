@@ -57,8 +57,7 @@ export function MapComponent() {
                     placemarks.map((e) => {
                         return (
                             <div className="placemark">
-                                <div className="placemarkEl">{e.coord[0]}</div>
-                                <div className="placemarkEl">{e.coord[1]}</div>
+
                                 <div className="placemarkEl">{e.name}</div>
                                 <button onClick={() => deletePlacemark(e)}>delete</button>
                             </div>
